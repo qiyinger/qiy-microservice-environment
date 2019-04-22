@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: microservice-gateway
+qiy:
+  application-type: gateway
+  enable: true
+  system:
+    name: mysystem

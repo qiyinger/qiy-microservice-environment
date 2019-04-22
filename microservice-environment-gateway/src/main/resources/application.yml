@@ -1,0 +1,39 @@
+server:
+  port: 8900
+
+spring:
+  datasource:
+    username: root
+    password: 1997
+    url: jdbc:mysql://106.15.182.191:3306/micro_manage?useUnicode=true&characterEncoding=utf8
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis-plus:
+  # xml
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      id-type: auto
+
+gateway:
+  route-sync:
+    scan-interval-time: 3000
+logging:
+  level:
+    root: debug
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: shutdown,mappings,gateway
+  endpoint:
+    shutdown:
+      enabled: true
