@@ -11,6 +11,8 @@
     <modules>
         <module>microservice-environment-eureka</module>
       <module>microservice-environment-gateway</module>
+      <module>microservice-environment-config</module>
+      <module>microservice-environment-auth</module>
     </modules>
 
     <parent>

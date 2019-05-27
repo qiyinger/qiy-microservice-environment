@@ -16,8 +16,6 @@ import reactor.core.publisher.Mono;
 /**
  * @author lizw@primeton.com
  */
-@Primary
-@Component
 public class DefaultKeyResolver extends PrincipalNameKeyResolver implements Ordered {
 
 	@Override

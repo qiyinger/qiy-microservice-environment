@@ -43,8 +43,6 @@ public class RouteEventListener {
   private RepositoryUtil repositoryUtil;
   @Autowired
   private ApplicationProperties applicationProperties;
-  @Autowired
-  private TokenBucketRateLimiter tokenBucketRateLimiter;
 
   @EventListener(condition = "#event.msgs[0].topic=='gateway' && #event.msgs[0].tags=='route'")
   public void commonRouteEventListener(RocketMqEvent event) {
@@ -81,21 +79,6 @@ public class RouteEventListener {
       }
       repositoryUtil.delete(code, true);
     }
-  }
-
-  @EventListener(condition = "#event.msgs[0].topic=='gateway' && #event.msgs[0].tags=='rate_limit'")
-  public void rateLimitEventListener(RocketMqEvent event) {
-    MessageExt messageExt = event.getMessageExt(0);
-    Integer routeId = Integer.valueOf(messageExt.getKeys());
-    List<RouteStrategy> routeStrategies = routeStrategyDao
-        .selectList(RouteStrategyQuery.getInstance().setRouteId(routeId).toQueryWrapper());
-    if (CollectionUtils.isEmpty(routeStrategies)) {
-      return;
-    }
-    List<Integer> strategyIds = routeStrategies.stream().map(RouteStrategy::getStrategyId)
-        .collect(Collectors.toList());
-    List<StrategyCall> strategyCalls = strategyCallDao.selectBatchIds(strategyIds);
-    tokenBucketRateLimiter.cleanTokenBucket(routeId);
   }
 
 }

@@ -17,7 +17,6 @@ import reactor.core.publisher.Mono;
  * 
  * @author lizw@primeton.com
  */
-@Component
 public class RouteKeyResolver implements KeyResolver, Ordered {
 
 	@Override

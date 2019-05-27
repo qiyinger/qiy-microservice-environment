@@ -14,11 +14,6 @@ import swust.qiy.microservice.gateway.rateLimit.TokenBucketRateLimiter;
 public class GatewayAutoConfiguration {
 
   @Bean
-  TokenBucketRateLimiter tokenBucketRateLimiter(Validator validator) {
-    return new TokenBucketRateLimiter(validator);
-  }
-
-  @Bean
   RouteEventListener routeEventListener() {
     return new RouteEventListener();
   }
